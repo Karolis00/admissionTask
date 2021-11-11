@@ -8,6 +8,14 @@
 </head>
 
 <body>
+    <div class="navbar">
+        <div class="active">
+            <a href="index.html">Home</a>
+        </div>
+        <div>
+            <a href="add.html">Pridėti</a>
+        </div>
+    </div>
     <table class="table" id="table">
         <tr>
             <th>User Id</th>
@@ -16,6 +24,7 @@
             <th>body</th>
         </tr>
     </table>
+
     <script>
         var table = document.getElementById("table");
         async function getData() {
@@ -26,7 +35,7 @@
             for (let i = 0; i < data.length; i++) {
                 const { body, id, title, userId } = data[i];
                 var row = table.insertRow(-1);
-                row.setAttribute("onclick","doStuff('"+String(id)+"');");
+                row.setAttribute("onclick", "redirect('" + String(id) + "');");
                 var cell0 = row.insertCell(0);
                 var cell1 = row.insertCell(1);
                 var cell2 = row.insertCell(2);
@@ -37,7 +46,7 @@
                 cell3.innerHTML = body;
             }
         }
-        function doStuff(id) {
+        function redirect(id) {
             window.location.href = "details.html?id=" + id;
 
         }
