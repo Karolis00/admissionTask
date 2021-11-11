@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>List Page</title>
+</head>
+
+<body>
+
+    <form id="form">
+        <label for="userId">User Id</label><br>
+        <input type="text" id="userId" name="userId" value="50"><br>
+        <label for="id">Id</label><br>
+        <input type="text" id="id" name="id" value="200"><br>
+        <label for="title">Title</label><br>
+        <input type="text" id="title" name="title" value="nescsiunt quass odiso"><br>
+        <label for="body">Body</label><br>
+        <textarea name="body" form="form">Body</textarea><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        $('form').on('submit', function () {
+            var formData = new FormData(document.querySelector('form'));
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 201) {
+                    window.location.href = "index.html";
+                }
+            }
+            const url = "https://jsonplaceholder.typicode.com/posts";
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify({
+                userId: formData.get("userId"),
+                id: formData.get("id"),
+                title: formData.get("title"),
+                body: formData.get("body"),
+            }));
+            return false;
+        });
+
+
+    </script>
+</body>
+
+</html>
